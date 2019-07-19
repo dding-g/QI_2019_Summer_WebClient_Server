@@ -10,16 +10,19 @@ $app->get('/post/{id}', 'App\Controller\HomeController:viewPost')
 
 
 $app->get('/qi/signin', 'App\Controller\UserController:signin')
-    ->setName('usersignin');
+    ->setName('user_signin');
 
 $app->get('/qi/home', 'App\Controller\HomeController:viewHome')
-    ->setName('usersignin');
+    ->setName('home');
 
-$app->get('/qi/sign-up', 'App\Controller\SignUPController:view_sign_up')
-    ->setName('usersignin');
+$app->get('/qi/sign-up', 'App\Controller\SignInController:view_sign_up')
+    ->setName('user_signup');
 
 $app->post('/qi/sign-up/process', 'App\Controller\SignUPController:sign_up_process')
     ->setName('sign_up_process');
 
 $app->get('/qi/sign-in', 'App\Controller\SignInController:view_sign_in')
-    ->setName('usersignin');
+    ->setName('user_signin');
+
+$app->get('/qi/user/forgotten_password', 'App\Controller\ForgottenPWController:forgottenPW_view')
+    ->setName('user_forgotten_password');

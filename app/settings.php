@@ -1,4 +1,26 @@
 <?php
+
+// set database parameters based on server
+if ($_SERVER['HTTP_HOST'] == '192.168.33.99') {
+    $db_array = array(
+        'host' => '127.0.0.1:3306',
+        'user' => 'root',
+        'pass' => '12345678',
+        'dbname' => 'mydb'
+    );
+} else {
+    $db_array = array(
+        'host' => '127.0.0.1',
+        'user' => 'root',
+        'pass' => '',
+        'dbname' => 'pogo'
+    );
+}
+
+
+
+
+
 return [
     'settings' => [
         // comment this line when deploy to production environment
@@ -12,6 +34,13 @@ return [
                 'auto_reload' => true,
             ],
         ],
+
+
+        // Database connection settings
+        'dbSettings' => array(
+            'db' => $db_array,
+        ),
+
 
         // doctrine settings
         'doctrine' => [
@@ -32,7 +61,7 @@ return [
                 'password' => 'root',
             ]
         ],
-
+        
         // monolog settings
         'logger' => [
             'name' => 'app',

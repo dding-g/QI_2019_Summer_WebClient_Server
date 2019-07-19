@@ -7,6 +7,9 @@ $container = $app->getContainer();
 // Service providers
 // -----------------------------------------------------------------------------
 
+// Register component on container
+
+
 // Twig
 $container['view'] = function ($c) {
     $settings = $c->get('settings');
@@ -19,6 +22,10 @@ $container['view'] = function ($c) {
     return $view;
 };
 
+
+
+
+
 // Flash messages
 $container['flash'] = function ($c) {
     return new \Slim\Flash\Messages;
@@ -27,6 +34,17 @@ $container['flash'] = function ($c) {
 // -----------------------------------------------------------------------------
 // Service factories
 // -----------------------------------------------------------------------------
+
+// PDO database library
+$container['db'] = function ($c) {
+    $db = $c['settings']['dbSettings']['db'];
+    $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'], $db['user'], $db['pass']);
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    return $pdo;
+};
+
 
 // doctrine EntityManager
 $container['em'] = function ($c) {
@@ -40,6 +58,7 @@ $container['em'] = function ($c) {
     );
     return \Doctrine\ORM\EntityManager::create($settings['doctrine']['connection'], $config);
 };
+
 
 // monolog
 $container['logger'] = function ($c) {
@@ -56,4 +75,20 @@ $container['logger'] = function ($c) {
 
 $container['App\Controller\HomeController'] = function ($c) {
     return new App\Controller\HomeController($c);
+};
+
+$container['App\Controller\SignUPController'] = function ($c) {
+    $logger = $c->get('logger');
+    $testModel = $c->get('testModel');
+
+    return new App\Controller\SignUPController($logger, $testModel);
+};
+
+// -----------------------------------------------------------------------------
+// Model factories
+// -----------------------------------------------------------------------------
+$container['testModel'] = function ($c) {
+    $settings = $c->get('settings');
+    $testModel = new App\Model\TestModel($c->get('db'));
+    return $testModel;
 };
