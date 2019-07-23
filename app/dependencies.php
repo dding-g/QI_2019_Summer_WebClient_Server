@@ -46,6 +46,18 @@ $container['db'] = function ($c) {
 };
 
 
+// email setting
+$container['email'] = function ($c) {
+    $emailconfig = array(
+                          'host' => $c['settings']['emailSetting']['host'],
+                          'pw' => $c['settings']['emailSetting']['password'],
+                          'port' =>  $c['settings']['emailSetting']['port'],
+                        );
+
+    return $emailconfig;
+};
+
+
 // doctrine EntityManager
 $container['em'] = function ($c) {
     $settings = $c->get('settings');
@@ -80,8 +92,9 @@ $container['App\Controller\HomeController'] = function ($c) {
 $container['App\Controller\SignUPController'] = function ($c) {
     $logger = $c->get('logger');
     $testModel = $c->get('testModel');
+    $emailModel = $c->get('EmailModel');
 
-    return new App\Controller\SignUPController($logger, $testModel);
+    return new App\Controller\SignUPController($logger, $testModel, $emailModel);
 };
 
 // -----------------------------------------------------------------------------
@@ -91,4 +104,10 @@ $container['testModel'] = function ($c) {
     $settings = $c->get('settings');
     $testModel = new App\Model\TestModel($c->get('db'));
     return $testModel;
+};
+
+$container['EmailModel'] = function ($c) {
+    $settings = $c->get('settings');
+    $emailModel = new App\Model\EmailModel($c->get('email'));
+    return $emailModel;
 };

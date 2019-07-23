@@ -41,6 +41,13 @@ return [
             'db' => $db_array,
         ),
 
+        'emailSetting' => array(
+          
+          'host'=> 'area409@gmail.com',
+          'password' => 'persona333',
+          'port' => 587,
+
+        ),
 
         // doctrine settings
         'doctrine' => [
@@ -61,7 +68,7 @@ return [
                 'password' => 'root',
             ]
         ],
-        
+
         // monolog settings
         'logger' => [
             'name' => 'app',

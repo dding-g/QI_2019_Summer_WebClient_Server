@@ -14,5 +14,5 @@ final class SignUPController extends BaseController
     $this->view->render($response, 'register.twig', ['post' => $post, 'flash' => $messages]);
     return $response;
   }
-
+ 
 }

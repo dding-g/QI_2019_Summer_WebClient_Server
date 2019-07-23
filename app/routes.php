@@ -18,6 +18,9 @@ $app->get('/qi/home', 'App\Controller\HomeController:viewHome')
 $app->get('/qi/sign-up', 'App\Controller\SignInController:view_sign_up')
     ->setName('user_signup');
 
+$app->get('/qi/user_authorized/{authorized_code}', 'App\Controller\SignUPController:user_authorized_process')
+    ->setName('user_authorized');
+
 $app->post('/qi/sign-up/process', 'App\Controller\SignUPController:sign_up_process')
     ->setName('sign_up_process');
 

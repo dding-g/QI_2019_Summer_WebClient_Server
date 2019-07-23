@@ -4,6 +4,7 @@ namespace App\Controller;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+
 //require '\vendor\slim\pdo';
 
 final class SignUPController extends BaseController
@@ -11,12 +12,14 @@ final class SignUPController extends BaseController
 
   protected $logger;
   protected $testModel;
+  protected $emailModel;
 
   //construcor, inicialize in dependencies.php
-  public function __construct($logger, $testModel)
+  public function __construct($logger, $testModel, $emailModel)
   {
       $this->logger = $logger;
       $this->test = $testModel;
+      $this->emailconfig = $emailModel;
   }
 
 
@@ -38,6 +41,12 @@ final class SignUPController extends BaseController
     return password_hash(date("Y-m-d H:i:s"), PASSWORD_DEFAULT);
   }
 
+  public function user_authorized_process(Request $request, Response $response, $args){
+
+    echo $this->test->getAuthorizedCode($args['authorized_code']);
+
+  }
+
 
   //sign up process method
   public function sign_up_process(Request $request, Response $response, $args)
@@ -48,9 +57,11 @@ final class SignUPController extends BaseController
       $user_data['authorized_code'] = $authorized_code = password_hash(date("Y-m-d H:i:s"), PASSWORD_DEFAULT);
 
       $this->test->addUser($user_data);
+      $this->emailconfig->send_email($user_data['authorized_code']);
 
       echo $this->test->getAllUser();
+      echo "\nSuccess Send email";
+
       return $response;
    }
-
 }

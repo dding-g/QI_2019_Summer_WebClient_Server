@@ -54,11 +54,11 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" name="Password" placeholder="Password" onchange="Password_check()">
+                    <input type="password" class="form-control form-control-user" id = "Password" name="Password" placeholder="Password" onchange="Password_check_using_Regualation()">
                     <label id = "lb_pw"></label>
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" name="Password_confirm" placeholder="Repeat Password" onchange="Password_check()">
+                    <input type="password" class="form-control form-control-user" id = "Password_confirm" name="Password_confirm" placeholder="Repeat Password" onchange="Password_check_using_Regualation()">
                     <label id = "lb_pw_cf"></label>
                   </div>
                 </div>
@@ -107,13 +107,15 @@
 
     <script>
     // return 0 : not correct, return 1 : correct
-      function Password_check(){
+      function Password_check_using_Regualation(){
         var pw = document.getElementById('Password').value;
         var pw_confirm = document.getElementById('Password_confirm').value;
 
         var flag = 0;
+        var special_symbol_reqExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+        var capital_reqExp = /[A-Z]/;
 
-        if(pw.length <= 8){
+        if(pw.length <= 8 || pw.search(special_symbol_reqExp) == -1 || pw.search(capital_reqExp) == -1){
           document.getElementById('lb_pw').innerHTML = "password must be over 8 character include Special Symbol, Capital, Number";
           return 0;
         }else{
