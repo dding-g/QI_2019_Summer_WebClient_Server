@@ -25,7 +25,17 @@ final class SensorManagement extends BaseController
     $air_q_data_json = file_get_contents('php://input');
     $air_q_data = json_decode($air_q_data_json, true);  
 
-    $is_sign_out = $this->db_model->air_quality_data_record($air_q_data);
+    $air_q_status = $this->sensor_db_model->air_quality_data_record($air_q_data);
+
+    print_r($air_q_status);
   }
-  
+
+  //list view Process
+  public function device_list_view_process(Request $request, Response $response, $args)  {
+
+    $usn_json = file_get_contents('php://input');
+    $usn = json_decode($usn_json, true);  
+
+    return $this->sensor_db_model->get_deviceList_usn($usn);
+  }
 }

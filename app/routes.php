@@ -46,13 +46,19 @@ $app->post('/qi/user/sign-out/process', 'App\Controller\SignOutController:sign_o
 
 $app->get('/qi/user/forgotten_password', 'App\Controller\ForgottenPWController:forgottenPW_view')
     ->setName('user_forgotten_password');
+
+$app->get('/qi/user/forgotten_password/process', 'App\Controller\ForgottenPWController:forgotten_password_process')
+    ->setName('user_forgotten_password');
 //======================================
 
 
 // ==============SensorManagement=================
-$app->get('/qi/device/aq_record', 'App\Controller\SensorManagement:airQuality_record')
+$app->post('/qi/device/aq_record', 'App\Controller\SensorManagement:airQuality_record')
     ->setName('airQuality_record');
 
 $app->post('/qi/device/registrate_process', 'App\Controller\SensorManagement:sensor_registration_process')
     ->setName('airQuality_record');
+
+$app->post('/qi/device/list_view', 'App\Controller\SensorManagement:device_list_view_process')
+    ->setName('list_view');
 //======================================
