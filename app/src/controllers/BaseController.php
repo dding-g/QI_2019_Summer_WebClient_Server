@@ -9,6 +9,8 @@ class BaseController
     protected $logger;
     protected $flash;
     protected $em;  // Entities Manager
+    protected $db;
+    protected $emailModel;
 
     public function __construct(Container $c)
     {
@@ -16,12 +18,8 @@ class BaseController
         $this->logger = $c->get('logger');
         $this->flash = $c->get('flash');
         $this->em = $c->get('em');
+        $this->db_model = $c->get('DBModel');
+        $this->emailconfig = $c->get('EmailModel');
     }
 
-    public function __construct($logger, $testModel, $emailModel)
-    {
-        $this->logger = $logger;
-        $this->test = $testModel;
-        $this->emailconfig = $emailModel;
-    }
 }

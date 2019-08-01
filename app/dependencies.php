@@ -90,20 +90,35 @@ $container['App\Controller\HomeController'] = function ($c) {
 };
 
 $container['App\Controller\SignUPController'] = function ($c) {
+    return new App\Controller\SignUPController($c);
+};
+
+$container['App\Controller\SignInController'] = function ($c) {
     $logger = $c->get('logger');
-    $testModel = $c->get('testModel');
+    $DBModel = $c->get('DBModel');
     $emailModel = $c->get('EmailModel');
 
-    return new App\Controller\SignUPController($logger, $testModel, $emailModel);
+    return new App\Controller\SignInController($c);
+};
+
+$container['App\Controller\SensorManagement'] = function ($c) {
+    $Sensor_DBModel = $c->get('Sensor_DBModel');
+    return new App\Controller\SensorManagement($c);
 };
 
 // -----------------------------------------------------------------------------
 // Model factories
 // -----------------------------------------------------------------------------
-$container['testModel'] = function ($c) {
+$container['DBModel'] = function ($c) {
     $settings = $c->get('settings');
-    $testModel = new App\Model\TestModel($c->get('db'));
-    return $testModel;
+    $DBModel = new App\Model\DBModel($c->get('db'));
+    return $DBModel;
+};
+
+$container['Sensor_DBModel'] = function ($c) {
+    $settings = $c->get('settings');
+    $Sensor_DBModel = new App\Model\Sensor_DBModel($c->get('db'));
+    return $Sensor_DBModel;
 };
 
 $container['EmailModel'] = function ($c) {

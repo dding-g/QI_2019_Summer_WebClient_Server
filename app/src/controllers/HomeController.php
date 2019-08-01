@@ -36,7 +36,7 @@ final class HomeController extends BaseController
 //View Homepage
     public function viewHome(Request $request, Response $response, $args)
     {
-      $this->view->render($response, 'index.twig', ['post' => $post, 'flash' => $messages]);
+      $this->view->render($response, 'index_home.twig');
       return $response;
     }
 }
