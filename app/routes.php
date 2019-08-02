@@ -41,6 +41,14 @@ $app->post('/qi/user/sign-out/process', 'App\Controller\SignOutController:sign_o
     ->setName('sign_out_process');
 //======================================
 
+// ==============Change Password=================
+$app->get('/qi/user/change_password', 'App\Controller\MypageController:change_pw_view')
+    ->setName('change_password');
+
+$app->post('/qi/user/change_password/process', 'App\Controller\MypageController:web_change_pw_process')
+    ->setName('web_change_pw_process');
+//========================================
+
 
 // ==============Forgotten PW=================
 
@@ -58,7 +66,27 @@ $app->post('/qi/device/aq_record', 'App\Controller\SensorManagement:airQuality_r
 
 $app->post('/qi/device/registrate_process', 'App\Controller\SensorManagement:sensor_registration_process')
     ->setName('airQuality_record');
+    
+$app->post('/android/device/deregistrate_process', 'App\Controller\SensorManagement:android_sensor_deregistration_process')
+    ->setName('airQuality_record');
 
-$app->post('/qi/device/list_view', 'App\Controller\SensorManagement:device_list_view_process')
-    ->setName('list_view');
+$app->post('/android/device/deregistrate_process', 'App\Controller\SensorManagement:android_sensor_deregistration_process')
+    ->setName('airQuality_record');
+
+$app->post('/qi/device/list_view', 'App\Controller\SensorManagement:web_device_list_view_process')
+    ->setName('android_device_list_view_process');
+
+$app->post('/android/device/list_view', 'App\Controller\SensorManagement:android_device_list_view_process')
+    ->setName('android_device_list_view_process');
+//======================================
+
+
+// ==============MyPage=================
+$app->get('/qi/user/mypage', 'App\Controller\MypageController:mypage_view')
+    ->setName('MypageController');
+//======================================
+
+// ==============Profile=================
+$app->get('/qi/user/profile', 'App\Controller\ProfileController:profile_view')
+    ->setName('profile_view');
 //======================================

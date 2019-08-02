@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use Slim\Container;
+
 class BaseController
 {
-    protected $view;
-    protected $logger;
-    protected $flash;
-    protected $em;  // Entities Manager
-    protected $db;
-    protected $emailModel;
+    // protected $view;
+    // protected $logger;
+    // protected $flash;
+    // protected $em;  // Entities Manager
+    // protected $db;
+    // protected $emailModel;
 
     public function __construct(Container $c)
     {
@@ -20,6 +21,8 @@ class BaseController
         $this->em = $c->get('em');
         $this->db_model = $c->get('DBModel');
         $this->emailconfig = $c->get('EmailModel');
+        $this->sensor_db_model = $c->get('Sensor_DBModel');
+
     }
 
 }

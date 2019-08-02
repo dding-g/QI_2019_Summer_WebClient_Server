@@ -87,10 +87,14 @@
         if(data.result_code == 1){
           localStorage.setItem("email", data.email);
           localStorage.setItem("usn", data.usn);
+          localStorage.setItem("fistname", data.fistname);
+          localStorage.setItem("lastname", data.lastname);
+          localStorage.setItem("nickname", data.nickname);
 
           window.location.href = "http://teama-iot.calit2.net/";
-        }else if(data.result_code == 2){
-          
+        }else{
+          window.location.href = "http://teama-iot.calit2.net/qi/sign-in";
+          alert('Password or Email is wrong!');
         }
        
       });

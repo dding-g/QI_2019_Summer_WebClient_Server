@@ -37,14 +37,17 @@ final class SignInController extends BaseController
 
         if($sign_in == 1){
           
-          $usn_json = $this->db_model->getUserInfo($user_data['email']);
-          $usn = json_decode($usn_json, true);
-          $usn = $usn['usn'];
+          $user_info_json = $this->db_model->getUserInfo($user_data['email']);
+          $user_info = json_decode($user_info_json, true);
+          $usn = $user_info['usn'];
 
           $json = array(
                         'result_code' => 1,
                         'email'=>$user_data['email'],
-                        'usn'=>$usn
+                        'usn'=>$usn,
+                        'firstname'=>$user_info['firstname'],
+                        'lastname'=>$user_info['lastname'],
+                        'nickname'=>$user_info['nickname']
                       );
           return $response->withJson($json);
 
@@ -102,8 +105,9 @@ final class SignInController extends BaseController
         }
 
       }else{
-        $json = array('result_code' => 2,
-                    'message'=> 'Fail. PW is not corret'); 
+        $json = array('result_code' => 3,
+                    'message'=> 'Fail. PW is not corret');
+        return json_encode($json);
       }
     }catch(\Exception $e){
       $json = array('result_code' => 0,

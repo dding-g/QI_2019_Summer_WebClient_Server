@@ -101,10 +101,16 @@ $container['App\Controller\SignInController'] = function ($c) {
     return new App\Controller\SignInController($c);
 };
 
+$container['App\Controller\MypageController'] = function ($c) {
+    return new App\Controller\MypageController($c);
+};
+
 $container['App\Controller\SensorManagement'] = function ($c) {
     $Sensor_DBModel = $c->get('Sensor_DBModel');
     return new App\Controller\SensorManagement($c);
 };
+
+
 
 // -----------------------------------------------------------------------------
 // Model factories

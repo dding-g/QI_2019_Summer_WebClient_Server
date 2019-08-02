@@ -5,24 +5,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 
-//require '\vendor\slim\pdo';
-
 final class SignUPController extends BaseController
 {
-
-  // protected $logger;
-  // protected $DBModel;
-  // protected $emailModel;
-
-  // //construcor, inicialize in dependencies.php
-  // public function __construct($logger, $DBModel, $emailModel)
-  // {
-  //     $this->logger = $logger;
-  //     $this->db_model = $DBModel;
-  //     $this->emailconfig = $emailModel;
-  // }
-
-
 
   public function view_sign_up(Request $request, Response $response, $args)
   {
@@ -117,7 +101,6 @@ final class SignUPController extends BaseController
    //mobile sign up process method
   public function mobile_sign_up_process(Request $request, Response $response, $args)
   {
-    
     try{
       $user_data_json = file_get_contents('php://input');
       $user_data = json_decode($user_data_json, true);  
